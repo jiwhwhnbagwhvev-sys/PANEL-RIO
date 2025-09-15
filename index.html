@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PANEL RIO</title>
+<style>
+  body {
+    margin:0;
+    background:#000;
+    font-family: Arial, sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    color:#fff;
+  }
+
+  .container {
+    width:95%;
+    max-width:420px;
+    text-align:center;
+  }
+
+  .title {
+    font-size:26px;
+    font-weight:bold;
+    animation: colorChange 2s infinite alternate;
+    letter-spacing:2px;
+    margin-bottom:15px;
+    cursor:pointer;
+    text-shadow:0 0 15px #a020f0;
+  }
+
+  @keyframes colorChange {
+    from { color: #a020f0; }
+    to { color: #fff; }
+  }
+
+  .login-box {
+    background:#a020f0;
+    padding:20px;
+    border-radius:8px;
+    box-shadow:0 0 20px rgba(160,32,240,0.6);
+  }
+
+  .login-box input[type="text"],
+  .login-box input[type="password"] {
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border:none;
+    border-radius:4px;
+    font-size:14px;
+  }
+
+  .login-box button {
+    width:100%;
+    padding:10px;
+    background:#fff;
+    color:#000;
+    border:none;
+    border-radius:4px;
+    cursor:pointer;
+    font-weight:bold;
+  }
+
+  .hidden-panel {
+    background:rgba(10,10,10,0.95);
+    border:2px solid #a020f0;
+    border-radius:8px;
+    margin-top:15px;
+    text-align:left;
+    display:none;
+    box-shadow:0 0 30px #a020f0;
+    /* scroll area */
+    max-height:70vh;
+    overflow-y:auto;
+    padding:15px;
+  }
+
+  .hidden-panel h3 {
+    text-align:center;
+    margin-bottom:10px;
+    color:#a020f0;
+    font-size:18px;
+    text-shadow:0 0 8px #a020f0;
+  }
+
+  .section-title {
+    font-size:14px;
+    font-weight:bold;
+    margin-top:10px;
+    color:#fff;
+    text-shadow:0 0 5px #a020f0;
+    border-bottom:1px solid #a020f0;
+    padding-bottom:3px;
+  }
+
+  .feature {
+    margin:5px 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  .toggle {
+    appearance:none;
+    width:40px;
+    height:20px;
+    background:#555;
+    border-radius:20px;
+    position:relative;
+    outline:none;
+    cursor:pointer;
+  }
+
+  .toggle:checked {
+    background:#a020f0;
+  }
+
+  .toggle:before {
+    content:'';
+    position:absolute;
+    width:18px;
+    height:18px;
+    background:#fff;
+    border-radius:50%;
+    top:1px;
+    left:1px;
+    transition:0.3s;
+  }
+
+  .toggle:checked:before {
+    transform:translateX(20px);
+  }
+
+  .start-btn {
+    display:block;
+    margin-top:10px;
+    width:100%;
+    padding:10px;
+    background:#fff;
+    color:#000;
+    border:none;
+    border-radius:4px;
+    font-weight:bold;
+    cursor:pointer;
+    text-align:center;
+    text-decoration:none;
+  }
+
+  .device-info {
+    font-size:12px;
+    color:#ccc;
+    text-align:center;
+    margin-top:8px;
+  }
+
+  .sensi-box {
+    background:#111;
+    border:1px solid #a020f0;
+    border-radius:8px;
+    padding:10px;
+    margin-top:15px;
+    text-align:left;
+  }
+
+  .sensi-box h4 {
+    text-align:center;
+    margin:0 0 10px;
+    font-size:16px;
+    background: linear-gradient(90deg,#a020f0,#fff,#a020f0);
+    background-size:200% auto;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation: shine 3s linear infinite;
+  }
+
+  .autotap-box {
+    background:#111;
+    border:1px solid #a020f0;
+    border-radius:8px;
+    padding:15px;
+    margin:15px 0;
+    display:none;
+    box-shadow:0 0 15px #a020f0;
+  }
+
+  .autotap-box ul {
+    list-style:none;
+    padding:0;
+    margin:0;
+  }
+
+  .autotap-box ul li {
+    padding:5px 0;
+    border-bottom:1px dotted #333;
+    font-size:14px;
+  }
+
+  .autotap-title {
+    text-align:center;
+    font-size:18px;
+    font-weight:bold;
+    margin-top:0;
+    margin-bottom:10px;
+    background: linear-gradient(90deg,#a020f0,#fff,#a020f0);
+    background-size:200% auto;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation: shine 3s linear infinite;
+  }
+
+  @keyframes shine {
+    0% {background-position:0%;}
+    100% {background-position:200%;}
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="title">PANEL RIO</div>
+
+  <!-- Login Box -->
+  <div class="login-box" id="loginBox">
+    <input type="text" id="username" placeholder="USERNAME">
+    <input type="password" id="password" placeholder="PASSWORD">
+    <button id="loginBtn">LOGIN</button>
+  </div>
+
+  <!-- Panel Fitur -->
+  <div class="hidden-panel" id="featuresPanel">
+    <h3>MENU FITUR PANEL RIO</h3>
+
+    <div class="section-title">MENU AIM</div>
+    <div class="feature"><span>Aimbot 95%</span><input type="checkbox" class="toggle"></div>
+    <div class="feature"><span>Aimlock</span><input type="checkbox" class="toggle"></div>
+    <div class="feature"><span>Fast Scope</span><input type="checkbox" class="toggle"></div>
+    <div class="feature"><span>Auto Fire</span><input type="checkbox" class="toggle"></div>
+    <div class="feature"><span>Smart Aim Assist</span><input type="checkbox" class="toggle"></div>
+
+    <div class="section-title">MENU ANTI BAN</div>
+    <div class="feature"><span>Anti Report</span><input type="checkbox" class="toggle"></div>
+    <div class="feature"><span>Anti Detected</span><input type="checkbox" class="toggle"></div>
+    <div class="feature"><span>Hide ID</span><input type="checkbox" class="toggle"></div>
+    <div class="feature"><span>Safe Mode</span><input type="checkbox" class="toggle"></div>
+
+    <div class="section-title">MENU REGEDIT</div>
+    <div class="feature"><span>No Recoil</span><input type="checkbox" class="toggle"></div>
+    <div class="feature"><span>Damage Boost</span><input type="checkbox" class="toggle"></div>
+    <div class="feature"><span>Instant Reload</span><input type="checkbox" class="toggle"></div>
+    <div class="feature"><span>Fast Movement</span><input type="checkbox" class="toggle"></div>
+
+    <div class="section-title">MENU GRAFIK</div>
+    <div class="feature"><span>Ultra HD</span><input type="checkbox" class="toggle"></div>
+    <div class="feature"><span>Extreme FPS</span><input type="checkbox" class="toggle"></div>
+    <div class="feature"><span>Night Mode</span><input type="checkbox" class="toggle"></div>
+
+    <!-- Sensitivitas box -->
+    <div class="sensi-box">
+      <h4>🎚️ SENSI VITAS EDSOT</h4>
+      <button class="start-btn" onclick="toggleBox('autoTap24')">Autotap 2GB/4GB</button>
+      <button class="start-btn" onclick="toggleBox('midRange')">4GB–6GB RAM</button>
+      <button class="start-btn" onclick="toggleBox('desertEagle4')">Desert Eagle 4GB</button>
+      <button class="start-btn" onclick="toggleBox('desertEagle6')">Desert Eagle 6GB</button>
+      <button class="start-btn" onclick="toggleBox('desertEagle8')">Desert Eagle 8GB</button>
+    </div>
+
+    <!-- AUTOTAP BOXES -->
+    <div class="autotap-box" id="autoTap24">
+      <h4 class="autotap-title">AUTOTAP 2GB / 4GB RAM</h4>
+      <ul>
+        <li><b>General:</b> 190</li>
+        <li>🔴 <b>Red Dot:</b> 170</li>
+        <li>🔍 <b>2X Scope:</b> 165</li>
+        <li>🎯 <b>4X Scope:</b> 150</li>
+        <li>🎯 <b>Sniper Scope:</b> 70</li>
+        <li>👀 <b>Free Camera:</b> 150</li>
+        <li>🔥 <b>Fire Button Size:</b> 46</li>
+        <li>🖱️ <b>DPI:</b> 500 – 520 ✅</li>
+      </ul>
+    </div>
+
+    <div class="autotap-box" id="midRange">
+      <h4 class="autotap-title">4GB – 6GB RAM</h4>
+      <ul>
+        <li>🎮 <b>General:</b> 188</li>
+        <li>🔴 <b>Red Dot:</b> 168</li>
+        <li>🔍 <b>2X Scope:</b> 162</li>
+        <li>🎯 <b>4X Scope:</b> 152</li>
+        <li>🎯 <b>Sniper Scope:</b> 90</li>
+        <li>👀 <b>Free Camera:</b> 110</li>
+        <li>🔥 <b>Fire Button Size:</b> 45</li>
+        <li>🖱️ <b>DPI:</b> 440 – 470 ✅</li>
+      </ul>
+    </div>
+
+    <div class="autotap-box" id="desertEagle4">
+      <h4 class="autotap-title">Desert Eagle 4GB RAM</h4>
+      <ul>
+        <li>🎮 <b>General:</b> 199</li>
+        <li>🔴 <b>Red Dot:</b> 185</li>
+        <li>🔍 <b>2X Scope:</b> 185</li>
+        <li>🎯 <b>4X Scope:</b> 170</li>
+        <li>🎯 <b>Sniper Scope:</b> 158</li>
+        <li>👀 <b>Free Look:</b> 150</li>
+        <li>🔧 <b>DPI:</b> 560</li>
+        <li>✅ <b>Button Size:</b> 48</li>
+      </ul>
+    </div>
+
+    <div class="autotap-box" id="desertEagle6">
+      <h4 class="autotap-title">Desert Eagle 6GB RAM</h4>
+      <ul>
+        <li>🎮 <b>General:</b> 178</li>
+        <li>🔴 <b>Red Dot:</b> 170</li>
+        <li>🔍 <b>2X Scope:</b> 200</li>
+        <li>🎯 <b>4X Scope:</b> 200</li>
+        <li>🎯 <b>Sniper Scope:</b> 42</li>
+        <li>👀 <b>Free Look:</b> 200</li>
+        <li>🔧 <b>DPI:</b> 460</li>
+        <li>✅ <b>Button Size:</b> 45</li>
+      </ul>
+    </div>
+
+    <div class="autotap-box" id="desertEagle8">
+      <h4 class="autotap-title">Desert Eagle 8GB RAM</h4>
+      <ul>
+        <li>🎮 <b>General:</b> 163</li>
+        <li>🔴 <b>Red Dot:</b> 185</li>
+        <li>🔍 <b>2X Scope:</b> 175</li>
+        <li>🎯 <b>4X Scope:</b> 165</li>
+        <li>🎯 <b>Sniper Scope:</b> 160</li>
+        <li>👀 <b>Free Look:</b> 185</li>
+        <li>🔧 <b>DPI:</b> 500</li>
+        <li>✅ <b>Button Size:</b> 44</li>
+      </ul>
+    </div>
+
+    <a href="https://play.google.com/store/apps/details?id=com.dts.freefireth" class="start-btn">START GAME</a>
+    <div class="device-info" id="deviceInfo"></div>
+  </div>
+</div>
+
+<script>
+  const loginBtn=document.getElementById('loginBtn');
+  const featuresPanel=document.getElementById('featuresPanel');
+  const loginBox=document.getElementById('loginBox');
+
+  loginBtn.addEventListener('click',()=>{
+    const user=document.getElementById('username').value.trim();
+    const pass=document.getElementById('password').value.trim();
+    if(user==='PANEL RIO 2025' && pass==='WORK 2025'){
+      loginBox.style.display='none';
+      featuresPanel.style.display='block';
+    } else {
+      alert('Username / Password salah!');
+    }
+  });
+
+  function toggleBox(id){
+    const box=document.getElementById(id);
+    box.style.display=box.style.display==='block'?'none':'block';
+  }
+
+  function getDeviceInfo(){
+    const ua=navigator.userAgent;
+    const matchModel=ua.match(/\((.*?)\)/);
+    const model=matchModel?matchModel[1]:'Unknown';
+    document.getElementById('deviceInfo').innerText=`DEVICE: ${model}`;
+  }
+  getDeviceInfo();
+</script>
+
+</body>
+</html>
